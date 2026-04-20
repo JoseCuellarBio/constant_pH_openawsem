@@ -1,0 +1,7 @@
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A
+mm_analyze.py 1ZUG -t /home/matador/constant_pH_openawsem/1ZUG/movie.dcd --subMode -1 -f forces_setup.py --fasta crystal_structure.fasta -c A

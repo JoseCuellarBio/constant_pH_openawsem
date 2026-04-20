@@ -1,0 +1,15 @@
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 1000 -r 100 --interruptFrequency 10 --pH 7.0 --tempStart 300 -m 0 -p CPU
+mm_run.py 1ZUG -s 10000 -r 100 --interruptFrequency 10 --pH 4.0 --tempStart 300 -m 0 -p CUDA
+mm_run.py 1ZUG -s 10000 -r 100 --interruptFrequency 10 --pH 4.0 --tempStart 300 -m 0 -p CUDA
+mm_run.py 1ZUG -s 10000 -r 100 --interruptFrequency 10 --pH 4.0 --tempStart 300 -m 0 -p CUDA
+mm_run.py 1ZUG -s 10000 -r 100 --interruptFrequency 10 --pH 4.0 --tempStart 300 -m 0 -p CUDA
+mm_run.py 1ZUG -s 10000 -r 100 --interruptFrequency 10 --pH 4.0 --tempStart 300 -m 0 -p CUDA

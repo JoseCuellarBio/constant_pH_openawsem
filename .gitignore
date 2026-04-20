@@ -1,0 +1,25 @@
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Logs and outputs
+*.log
+*.out
+
+# Simulation trajectories / generated movies
+*.dcd
+*.xtc
+*.trr
+*.nc
+movie.pdb
+movie_*.pdb
+
+# Local editor / OS files
+.DS_Store
+.vscode/
+.idea/
