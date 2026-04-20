@@ -23,3 +23,6 @@ movie_*.pdb
 .DS_Store
 .vscode/
 .idea/
+
+# Codex local markers
+.codex
