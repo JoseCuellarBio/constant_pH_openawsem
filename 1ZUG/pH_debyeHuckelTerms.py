@@ -39,7 +39,7 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
     chargeInfo = np.loadtxt(chargeFile)
     charge_dict = {int(i): float(q) for i, q in chargeInfo}
 
-    # Use CB, or CA for GLY.
+    # Use CB, or CA instead.
 
     cb_fixed = [x if x > 0 else y for x, y in zip(oa.cb, oa.ca)]
 
