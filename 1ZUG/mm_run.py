@@ -15,9 +15,9 @@ import json
 from openawsem import *
 from openawsem.helperFunctions.myFunctions import *
 from Montecarlo import (
-    Proteina,
+    Protein,
     get_target_atom_indices_and_info,
-    procesador_de_archivo_con_residuos_cargados,
+    process_charged_residue_file,
 )
 
 # simulation_platform = "CPU"  # OpenCL, CUDA, CPU, or Reference
@@ -169,21 +169,21 @@ def run(args):
         
         interrupt_frequency = args.interruptFrequency
 
-        # Obtener ambas listas  
+        # Get target atom indices and metadata.
         indices, target_atoms_info = get_target_atom_indices_and_info(oa)  
          
-        charged_residues = procesador_de_archivo_con_residuos_cargados('charge.txt')  # lee el archivo y los pasa a una lista de tuplas (Residuo,carga)
+        charged_residues = process_charged_residue_file('charge.txt')
 
         seq_oa = oa.seq
         print("seq_oa", seq_oa)
 
         Hawsem_state = []
 
-        # limpiar/crear archivo de estado
+        # Clear or create the state file.
         with open('Hawsem.state', 'w') as f:
             pass
 
-        # pH fijo para toda la simulación
+        # Fixed pH for the whole simulation.
         pH = args.pH
 
         total_steps = 0
@@ -198,24 +198,24 @@ def run(args):
 
             total_steps += remaining_steps
 
-            # Obtener posiciones actuales  
+            # Get current positions.
             state = simulation.context.getState(getPositions=True)  
             positions = state.getPositions()  
             coords = [(positions[i].x, positions[i].y, positions[i].z) for i in indices]
 
-            # crear objeto proteína
-            prot = Proteina(target_atoms_info, coords=coords, list_charged_residues=charged_residues, pH=pH)
+            # Build the protein object.
+            prot = Protein(target_atoms_info, coords=coords, list_charged_residues=charged_residues, pH=pH)
 
-            # elegir residuo para MC
+            # Select a residue for MC.
             residue_mc = prot.mc.choose_residue()
             # print(residue_mc)
 
-            # intento de cambio de protonación
+            # Attempt a protonation-state change.
             charged_residues, new_parameters = prot.protonation_mc.attempt_charge_flip(charged_residues)
 
             prot.list_charged_residues = charged_residues
 
-            # actualizar parámetros de Debye-Huckel si hubo cambio
+            # Update Debye-Huckel parameters if a change was accepted.
             if new_parameters is not None:
 
                 particle_index, new_charge = new_parameters
@@ -227,7 +227,7 @@ def run(args):
 
                 last_force.updateParametersInContext(simulation.context)
 
-            # guardar estado de cargas
+            # Save charge state.
             if total_steps % reporter_frequency == 0:
 
                 Hawsem_state_line = json.dumps(charged_residues) + str(pH)

@@ -31,9 +31,7 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
 
     dh.setCutoffDistance(3.0)
 
-    # -------------------------
-    # Leer archivo de cargas
-    # -------------------------
+    # Read charge file.
 
     if chargeFile is None:
         raise ValueError("chargeFile must be provided")
@@ -41,17 +39,13 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
     chargeInfo = np.loadtxt(chargeFile)
     charge_dict = {int(i): float(q) for i, q in chargeInfo}
 
-    # -------------------------
-    # CB o CA (si GLY)
-    # -------------------------
+    # Use CB, or CA for GLY.
 
     cb_fixed = [x if x > 0 else y for x, y in zip(oa.cb, oa.ca)]
 
     charged_atoms = []
 
-    # -------------------------
-    # Asignar cargas
-    # -------------------------
+    # Assign charges.
 
     for i in range(oa.natoms):
 
@@ -67,9 +61,7 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
         if charge != 0.0:
             charged_atoms.append(i)
 
-    # -------------------------
-    # Solo interactúan cargados
-    # -------------------------
+    # Restrict interactions to charged atoms.
 
     if len(charged_atoms) > 0:
         dh.addInteractionGroup(charged_atoms, charged_atoms)

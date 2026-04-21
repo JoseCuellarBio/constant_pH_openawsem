@@ -5,7 +5,7 @@ import random
 import os
 
 
-class Proteina:
+class Protein:
     def __init__(self, source, coords=None, list_charged_residues=None, pH=7.0):
 
         self.type_dict = {
@@ -18,16 +18,16 @@ class Proteina:
 
         self.list_charged_residues = list_charged_residues or []
 
-        # ---- Detectar tipo de input ----
+        # Detect input type.
         if isinstance(source, str):
             self.data = self._parse_pdb(source)
 
         elif isinstance(source, list) and coords is not None:
-            # input de openawsem
+            # OpenAWSEM input.
             self.data = self._parse_openawsem(source, coords)
 
         else:
-            # dataframe
+            # DataFrame input.
             self.data = self._parse_dataframe(source)
 
         if not self.list_charged_residues:
@@ -219,10 +219,10 @@ def accept_or_reject(resid, protein, charged_residues,
 
     if dE < 0 or random.random() < math.exp(-dE/(kb*T)):
 
-        # actualizar lista de residuos cargados
+        # Update the charged-residue list.
         new_list = [(r, new_charge if r == resid else q) for r, q in charged_residues]
 
-        # obtener índice de partícula (CB o CA)
+        # Get the particle index (CB or CA).
         atom_dict = protein.data[resid]["atoms"]
         atom_name = list(atom_dict.keys())[0]
         particle_index = atom_dict[atom_name]["index"]
@@ -253,7 +253,7 @@ class ProtonationMC:
 
         old_charge = info["charge"]
 
-        # print("DEBUG tipo residuo:", resid, info["resname"], "→", info["type"])
+        # print("DEBUG residue type:", resid, info["resname"], "->", info["type"])
 
         acid_base = -1 if info["type"] == "A" else 1 if info["type"] == "B" else 0
 
@@ -284,11 +284,11 @@ class ProtonationMC:
         return new_list, particle_info
         
 #############################################
-##### MAS FUNCIONES #########################
+##### MORE FUNCTIONS ########################
 #############################################
 
-def procesador_de_archivo_con_residuos_cargados(archivo):
-    with open(archivo, 'r') as file:
+def process_charged_residue_file(filename):
+    with open(filename, 'r') as file:
         residues = []
         for line in file:
             parts = line.split()
@@ -296,13 +296,13 @@ def procesador_de_archivo_con_residuos_cargados(archivo):
             charge = float(parts[1])
             residues.append((residue, charge))
 
-    # Filtrar los residuos con carga diferente de cero
+    # Keep residues with nonzero charge.
     charged_residues = [(residue, charge) for residue, charge in residues if charge != 0.0]
     
     return charged_residues
 
 def get_target_atom_indices_and_info(oa):  
-    """Retorna índices para filtrado eficiente y información completa de átomos CB/CA"""  
+    """Return target indices and full CB/CA atom metadata for efficient filtering."""  
     target_indices = []  
     target_atoms_info = []  
       
@@ -327,10 +327,10 @@ def get_target_atom_indices_and_info(oa):
         target_atom = cb_atom if cb_atom is not None else ca_atom  
           
         if target_atom is not None:  
-            # Índice para acceso rápido a posiciones  
+            # Index for fast position lookup.
             target_indices.append(target_atom.index)  
               
-            # Información completa  
+            # Full residue information.
             if residue.index < len(oa.seq):  
                 real_resname_one = oa.seq[residue.index]  
                 real_resname_three = one_to_three.get(real_resname_one, "UNK")  
@@ -342,4 +342,3 @@ def get_target_atom_indices_and_info(oa):
             )  
       
     return target_indices, target_atoms_info
-
