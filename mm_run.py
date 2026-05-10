@@ -14,7 +14,7 @@ import json
 
 from openawsem import *
 from openawsem.helperFunctions.myFunctions import *
-from Montecarlo import (
+from Montecarlo_2 import (
     Protein,
     get_target_atom_indices_and_info,
     process_charged_residue_file,
