@@ -15,11 +15,16 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
     k_dh *= oa.k_awsem * 0.1
     k_screening = 1.0
 
+    #dh = CustomNonbondedForce(
+    #    f"{k_dh}*charge1*charge2/r*exp(-{k_screening}*r/{screening_length})"
+    #    "*step(abs(res1-res2)-2+isChainEdge1*isChainEdge2)"
+    #)
+    
     dh = CustomNonbondedForce(
         f"{k_dh}*charge1*charge2/r*exp(-{k_screening}*r/{screening_length})"
-        "*step(abs(res1-res2)-2+isChainEdge1*isChainEdge2)"
+        "*step(abs(res1-res2)+isChainEdge1*isChainEdge2)"
     )
-
+    
     dh.addPerParticleParameter("charge")
     dh.addPerParticleParameter("res")
     dh.addPerParticleParameter("isChainEdge")
