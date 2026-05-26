@@ -60,15 +60,15 @@ def debye_huckel_term_constant_ph(oa, k_dh=5*4.184, forceGroup=30, screening_len
         if res_idx in charge_dict and i in cb_fixed:
             charge = charge_dict[res_idx]
 
-        is_chain_edge = 1 if (i in oa.chain_ends or i in oa.chain_starts) else 0
-        dh.addParticle([charge, res_idx, is_chain_edge])
-        
-        if i in oa.chain_starts and i in oa.ca:
+        if i in oa.chain_starts and i in oa.n:
            charge = 1.0
         
         if i in oa.chain_ends and i in oa.o:
            charge = -1.0
         
+        is_chain_edge = 1 if (i in oa.chain_ends or i in oa.chain_starts) else 0
+        dh.addParticle([charge, res_idx, is_chain_edge])
+
         if charge != 0.0:
             charged_atoms.append(i)
 
